@@ -21,7 +21,7 @@ config/app.php
     /**
      * Elasticsearch全文搜索
      */
-    Wangzd\LaravelScoutElasticsearch\ElasticsearchServiceProvider::class,
+    Wangzd\ScoutES\ElasticsearchServiceProvider::class,
 ],
 ```
 发布配置项;  

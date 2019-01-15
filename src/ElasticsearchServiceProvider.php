@@ -1,12 +1,12 @@
 <?php
 
-namespace Wangzd\LaravelScoutElasticsearch;
+namespace Wangzd\ScoutES;
 
 use Laravel\Scout\EngineManager;
 use Illuminate\Support\ServiceProvider;
-use Wangzd\LaravelScoutElasticsearch\Engine\ElasticsearchEngine;
-use Wangzd\LaravelScoutElasticsearch\Console\ImportCommand;
-use Wangzd\LaravelScoutElasticsearch\Console\FlushCommand;
+use Wangzd\ScoutES\ESEngine;
+use Wangzd\ScoutES\Console\ImportCommand;
+use Wangzd\ScoutES\Console\FlushCommand;
 
 class ElasticsearchServiceProvider extends ServiceProvider
 {
@@ -24,7 +24,7 @@ class ElasticsearchServiceProvider extends ServiceProvider
         }
 
         app(EngineManager::class)->extend('elasticsearch', function($app) {
-            return new ElasticsearchEngine();
+            return new ESEngine();
         });
     }
 

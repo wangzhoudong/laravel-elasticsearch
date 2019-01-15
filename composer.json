@@ -11,7 +11,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Wangzd\\": "src"
+            "Wangzd\\ES\\": "src/"
         }
     },
     "autoload-dev": {
@@ -31,7 +31,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Wangzd\\LaravelScoutElasticsearch\\ElasticsearchServiceProvider"
+                "Wangzd\\ES\\ElasticsearchServiceProvider"
             ]
         }
     }

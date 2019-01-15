@@ -1,6 +1,6 @@
 <?php
 
-namespace Wangzd\LaravelScoutElasticsearch;
+namespace Wangzd\ScoutES;
 
 use Elasticsearch\ClientBuilder;
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace Wangzd\LaravelScoutElasticsearch\Console;
+namespace Wangzd\ScoutES\Console;
 
 use Illuminate\Console\Command;
-use Wangzd\LaravelScoutElasticsearch\ElasticsearchClientTrait;
+use Wangzd\ScoutES\ElasticsearchClientTrait;
 
 class ImportCommand extends Command
 {

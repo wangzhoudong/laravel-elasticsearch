@@ -1,13 +1,13 @@
 <?php
 
-namespace Wangzd\LaravelScoutElasticsearch\Engine;
+namespace Wangzd\ScoutES\Engine;
 
 use Laravel\Scout\Builder;
 use Laravel\Scout\Engines\Engine;
 use Illuminate\Database\Eloquent\Collection;
-use Wangzd\LaravelScoutElasticsearch\ElasticsearchClientTrait;
+use Wangzd\ScoutES\ElasticsearchClientTrait;
 
-class ElasticsearchEngine extends Engine
+class ESEngine extends Engine
 {
     use ElasticsearchClientTrait;
 
