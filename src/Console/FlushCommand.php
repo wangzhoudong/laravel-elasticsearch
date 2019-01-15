@@ -3,11 +3,11 @@
 namespace Wangzd\ScoutES\Console;
 
 use Illuminate\Console\Command;
-use Wangzd\ScoutES\ElasticsearchClientTrait;
+use Wangzd\ScoutES\ESClientTrait;
 
 class FlushCommand extends Command
 {
-    use ElasticsearchClientTrait;
+    use ESClientTrait;
     /**
      * The name and signature of the console command.
      *
