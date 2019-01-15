@@ -27,5 +27,12 @@
     "require-dev": {
         "symfony/var-dumper": "^4.1",
         "phpunit/phpunit": ">=5.6"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Wangzd\\LaravelScoutElasticsearch\\ElasticsearchServiceProvider"
+            ]
+        }
     }
 }
