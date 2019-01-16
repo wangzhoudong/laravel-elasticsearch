@@ -40,7 +40,7 @@ class ESEngine extends Engine
         $models->each(function($model) use (&$params)
         {
             $type = $model->searchableAs();
-            $index = config('scout.elasticsearch.prefix').$type;
+            $index = config('scout.prefix').$type;
             $params['body'][] = [
                 'update' => [
                     '_id' => $model->getKey(),
@@ -71,7 +71,7 @@ class ESEngine extends Engine
         $models->each(function($model) use (&$params)
         {
             $type = $model->searchableAs();
-            $index = config('scout.elasticsearch.prefix').$type;
+            $index = config('scout.prefix').$type;
             $params['body'][] = [
                 'delete' => [
                     '_id' => $model->getKey(),
@@ -131,7 +131,7 @@ class ESEngine extends Engine
         $type = $builder->model->searchableAs();
         $filter = config('scout.elasticsearch.filter');
         $query = str_replace($filter, '', $builder->query);
-        $index = config('scout.elasticsearch.prefix').$type;
+        $index = config('scout.prefix').$type;
         $params = [
             'index' => $index,
             'type' => $type,

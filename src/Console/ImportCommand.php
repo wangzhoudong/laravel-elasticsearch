@@ -73,7 +73,7 @@ class ImportCommand extends Command
         // 创建索引
         $type = $model->searchableAs();
         $data = [
-            'index' => config('scout.elasticsearch.prefix').$type
+            'index' => config('scout.prefix').$type
         ];
 
         $client = $this->getElasticsearchClient();
