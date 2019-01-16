@@ -31,7 +31,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Wangzd\\ES\\ESServiceProvider"
+                "Wangzd\\ScoutES\\ESServiceProvider"
             ]
         }
     }
