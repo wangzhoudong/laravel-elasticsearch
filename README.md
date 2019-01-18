@@ -23,7 +23,13 @@ composer require wangzd/laravel-elasticsearch
     Wangzd\ScoutES\ESServiceProvider::class,
 ],
 ```
-3. 在 config/scout.php 添加配置
+3.发布配置项;  
+
+```
+```bash
+php artisan vendor:publish --provider="Laravel\Scout\ScoutServiceProvider"
+```
+4. 在 config/scout.php 添加配置
 
     ```
          'elasticsearch' => [
@@ -50,7 +56,7 @@ composer require wangzd/laravel-elasticsearch
 
     ```
       
-6. 在你的Model里面引用  Searchable   如
+5 在你的Model里面引用  Searchable   如
    ```
    namespace App\Models;
    
@@ -73,12 +79,12 @@ composer require wangzd/laravel-elasticsearch
    
    ```    
  
-7. 执行全量索引创建 该操作会自动创建阿里云APP
+6. 执行全量索引创建 该操作会自动创建阿里云APP
   ``` 
     php artisan scout:import "App\Models\ShopSearchModel"
  
   ``` 
-8.执行搜索
+7.执行搜索
 
 ```php
 use App\Models\ShopSearchModel;
