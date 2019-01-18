@@ -11,8 +11,7 @@ composer require wangzd/laravel-elasticsearch
 ```
 
 
-添加 Provider ；  
-config/app.php  
+2. Laravel 5.5 以下，`config/app.php`  中添加 `service provider`
 ```php
 'providers' => [
 
@@ -21,92 +20,71 @@ config/app.php
     /**
      * Elasticsearch全文搜索
      */
-    Wangzd\ScoutES\ElasticsearchServiceProvider::class,
+    Wangzd\ScoutES\ESServiceProvider::class,
 ],
 ```
-发布配置项;  
-```bash
-php artisan vendor:publish --provider="Laravel\Scout\ScoutServiceProvider"
-```
+3. 在 config/scout.php 添加配置
+
+    ```
+         'elasticsearch' => [
+                'hosts' => [
+                    env('ELASTICSEARCH_HOST', 'http://localhost'),
+                ],
+                'analyzer' => env('ELASTICSEARCH_ANALYZER', 'ik_max_word'),
+                'settings' => [],
+                'filter' => [
+                ]
+            ],
+    ```
+
 增加配置项；  
 .env ;
-```bash
-SCOUT_DRIVER=elasticsearch
-```
-模型中定义全文搜索；  
-此处以文章表为示例；  
-app/Models/Article.php
+    ```bash
+    
+    SCOUT_DRIVER=elasticsearch
+    SCOUT_PREFIX=local
+    #elasticsearch
+    
+    ELASTICSEARCH_HOST=127.0.0.1:9200
+    ELASTICSEARCH_INDEX=shop_test
+
+    ```
+      
+6. 在你的Model里面引用  Searchable   如
+   ```
+   namespace App\Models;
+   
+   use Illuminate\Database\Eloquent\Model;
+   use Laravel\Scout\Searchable;
+   
+   class ShopSearchModel extends Model
+   {
+       use Searchable;
+       /**
+        * 数据表名
+        */
+       protected $table = "shop_search";
+   
+       /**
+        * 主键
+        */
+       protected $primaryKey = "goods_id";
+   }
+   
+   ```    
+ 
+7. 执行全量索引创建 该操作会自动创建阿里云APP
+  ``` 
+    php artisan scout:import "App\Models\ShopSearchModel"
+ 
+  ``` 
+8.执行搜索
+
 ```php
-<?php
-
-namespace App\Models;
-
-use Illuminate\Database\Eloquent\Model;
-use Laravel\Scout\Searchable;
-
-class Article extends Model
-{
-    use Searchable;
-
-    /**
-     * 索引的字段
-     *
-     * @return array
-     */
-    public function toSearchableArray()
-    {
-        return $this->only('id', 'title', 'content');
-    }
-}
-```
-生成索引；  
-```bash
-php artisan elasticsearch:import "App\Models\Article"
-```
-使用起来也相当简单；  
-只需要把要搜索的内容传给 search() 方法即可;  
-routes/web.php  
-```php
-<?php
-use App\Models\Article;
-
-Route::get('search', function () {
-    // 为查看方便都转成数组
-    dump(Article::all()->toArray());
-    dump(Article::search('功能齐全的搜索引擎')->get()->toArray());
-});
-```
-
-默认使用 analysis-ik 作为分词器；  
-如果需要自定义配置；  
-config/scout.php 
-```php
-    'elasticsearch' => [
-        'prefix' => env('ELASTICSEARCH_PREFIX', 'laravel_'),
-        'hosts' => [
-            env('ELASTICSEARCH_HOST', 'http://localhost'),
-        ],
-        'analyzer' => env('ELASTICSEARCH_ANALYZER', 'ik_max_word'),
-        'settings' => [],
-        'filter' => [
-            '+',
-            '-',
-            '&',
-            '|',
-            '!',
-            '(',
-            ')',
-            '{',
-            '}',
-            '[',
-            ']',
-            '^',
-            '\\',
-            '"',
-            '~',
-            '*',
-            '?',
-            ':'
-        ]
-    ]
+use App\Models\ShopSearchModel;
+    
+    Route::get('search', function () {
+        // 为查看方便都转成数组
+        dump(ShopSearchModel::search('搜索关键字')->get()->toArray());
+    });
 ```

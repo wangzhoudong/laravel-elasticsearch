@@ -262,6 +262,10 @@ class ESEngine extends Engine
 
     public function flush($model)
     {
-
+        $index = [
+            'index' => config('scout.prefix').$model->searchableAs()
+        ];
+        $client = $this->getElasticsearchClient();
+        $client->indices()->delete($index);
     }
 }
