@@ -4,6 +4,12 @@
 为 [Laravel Scout](https://laravel-china.org/docs/laravel/5.5/scout/1346) 
 开发的 [Elasticsearch](https://baijunyao.com/article/155) 驱动；  
 
+为了方便大家测试，搭建了一个带分词的elasticsearch docker
+
+```
+ docker run --name=es -p 9200:9200 -p 9300:9300 -d dongen/elasticsearch:latest
+```
+
 ### 安装
 
 ```
